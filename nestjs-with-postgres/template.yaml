@@ -28,6 +28,7 @@ spec:
         - namespace
         - application_id
         - owner
+        - repoName
       properties:
         cluster_id:
           title: Cluster Id
