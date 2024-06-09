@@ -91,7 +91,7 @@ spec:
         sourcePath: ./source
         description: ${{parameters.description}}
         allowedHosts: ['github.com']
-        repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{ parameters.repoName }}
+        repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{parameters.namespace}}-${{parameters.application_id}}
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
@@ -104,8 +104,8 @@ spec:
         values:
           component_id: ${{parameters.namespace}}-${{parameters.application_id}}
           description: ${{parameters.description}}
-          destination: https://github.com/${{ parameters.owner }}/${{ parameters.repoName }}-gitops.git
-          source_repository: https://github.com/${{ parameters.owner }}/${{ parameters.repoName }}.git
+          destination: https://github.com/${{ parameters.owner }}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
+          source_repository: https://github.com/${{ parameters.owner }}/${{parameters.namespace}}-${{parameters.application_id}}.git
           repository_name: ${{parameters.namespace}}-${{parameters.application_id}}
           git_owner: ${{parameters.gitlabGroup}}
           cluster: ${{parameters.cluster_id}}
@@ -119,7 +119,7 @@ spec:
       name: Publishing to Deployment Resource Repository
       action: publish:gitlab
       input:
-        repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{ parameters.repoName }}-gitops
+        repoUrl: github.com?owner=${{ parameters.owner }}&repo=${{parameters.namespace}}-${{parameters.application_id}}-gitops
         title: gitops resources for ${{parameters.namespace}}-poi-backend-app
         description: gitops resources for ${{parameters.namespace}}-poi-backend-app
         sourcePath: ./tenant-gitops
@@ -139,7 +139,7 @@ spec:
         appName: ${{parameters.namespace}}-${{parameters.application_id}}-bootstrap
         argoInstance: main
         namespace: janus-argocd
-        repoUrl: https://github.com/${{ parameters.owner }}/${{ parameters.repoName }}-gitops.git
+        repoUrl: https://github.com/${{ parameters.owner }}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
         path: 'argocd/'
   output:
     links:
